@@ -31,3 +31,8 @@ h1 { margin: 0; font-size: 4vmin; flex: 1; }
   background: conic-gradient(rgba(255, 213, 79, 0.65) var(--p), transparent 0);
   pointer-events: none; display: none; z-index: 10;
 }
+.carta.errada { animation: piscar 0.5s ease-in-out 2; }
+@keyframes piscar {
+  0%, 100% { background: #f2f2f2; color: #101820; }
+  50%      { background: #e53935; color: #fff; }
+}

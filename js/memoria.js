@@ -8,10 +8,19 @@ export function embaralhar(lista) {
 }
 
 export function sortearPares(banco, quantidade) {
-  if (quantidade > banco.length) {
-    throw new Error(`Pediu ${quantidade} pares, mas o banco só tem ${banco.length}.`);
+  const escolhidos = [];
+  const respostasUsadas = new Set();
+
+  for (const par of embaralhar(banco)) {
+    if (respostasUsadas.has(par.resposta)) continue; // resposta repetida: pula
+    respostasUsadas.add(par.resposta);
+    escolhidos.push(par);
+    if (escolhidos.length === quantidade) return escolhidos;
   }
-  return embaralhar(banco).slice(0, quantidade);
+
+  throw new Error(
+    `O banco só tem ${escolhidos.length} pares com respostas diferentes, mas pediu ${quantidade}.`
+  );
 }
 
 function criarCartas(pares) {

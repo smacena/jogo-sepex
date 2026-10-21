@@ -28,6 +28,7 @@ function desenhar() {
       el.textContent = carta.texto;
     }
     if (carta.combinada) el.classList.add('combinada');
+    if (jogo.bloqueado && jogo.selecionadas.includes(i)) el.classList.add('errada');
     el.addEventListener('click', () => aoClicar(i));
     tabuleiro.appendChild(el);
   });
@@ -43,9 +44,10 @@ function terminar(texto) {
 function aoClicar(indice) {
   if (encerrado) return;
   const resultado = virarCarta(jogo, indice);
+  if (resultado === 'ignorada') return;
   desenhar();
   if (resultado === 'erro') {
-    setTimeout(() => { esconderErradas(jogo); desenhar(); }, 900);
+    setTimeout(() => { esconderErradas(jogo); desenhar(); }, 1500);
   }
   if (venceu(jogo)) terminar('Você venceu! 🎉');
 }
