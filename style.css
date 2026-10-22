@@ -36,3 +36,16 @@ h1 { margin: 0; font-size: 4vmin; flex: 1; }
   0%, 100% { background: #f2f2f2; color: #101820; }
   50%      { background: #e53935; color: #fff; }
 }
+
+[hidden] { display: none !important; }
+#escolha {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 4vmin;
+}
+#escolha h2 { font-size: 6vmin; margin: 0; }
+#niveis { display: flex; gap: 4vmin; flex-wrap: wrap; justify-content: center; }
+.nivel {
+  font-size: 5vmin; padding: 6vmin 8vmin;
+  border: 0; border-radius: 3vmin;
+  background: #2a3b4d; color: #f2f2f2; cursor: pointer;
+}

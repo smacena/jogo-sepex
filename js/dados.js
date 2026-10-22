@@ -1,4 +1,4 @@
-export const banco = [
+export const fundamental = [
   // --- ORIGINAIS ---
   { pergunta: "2x + 3 = 11", resposta: "x = 4" },
   { pergunta: "3x − 5 = 10", resposta: "x = 5" },
@@ -19,8 +19,6 @@ export const banco = [
   { pergunta: "10% de 450", resposta: "45" },
   { pergunta: "25% de 80", resposta: "20" },
   { pergunta: "30% de 60", resposta: "18" },
-  { pergunta: "Δ de x² − 6x + 5", resposta: "16" },
-  { pergunta: "f(x) = 2x + 5, f(6)", resposta: "17" },
 
   // --- NOVAS: Equações do 1º Grau ---
   { pergunta: "4x + 2 = 18", resposta: "x = 4" },
@@ -174,21 +172,14 @@ export const banco = [
   { pergunta: "9% de 300", resposta: "27" },
   { pergunta: "65% de 200", resposta: "130" },
   { pergunta: "55% de 60", resposta: "33" },
-  { pergunta: "85% de 40", resposta: "34" },
+  { pergunta: "85% de 40", resposta: "34" }
+];
 
-  // --- NOVAS: Discriminante (Δ = b² - 4ac) ---
-  /**{ pergunta: "Δ de x² − 4x + 4", resposta: "0" },
-  { pergunta: "Δ de x² − 5x + 6", resposta: "1" },
-  { pergunta: "Δ de x² − 7x + 10", resposta: "9" },
-  { pergunta: "Δ de 2x² − 3x + 1", resposta: "1" },
-  { pergunta: "Δ de x² + 2x − 3", resposta: "16" },
-  { pergunta: "Δ de x² + 6x + 9", resposta: "0" },
-  { pergunta: "Δ de 3x² − 5x + 2", resposta: "1" },
-  { pergunta: "Δ de x² − 8x + 15", resposta: "4" },
-  { pergunta: "Δ de 4x² − 4x + 1", resposta: "0" },
-  { pergunta: "Δ de −x² + 4x − 3", resposta: "4" },
-  { pergunta: "Δ de x² − x − 2", resposta: "9" },
-  { pergunta: "Δ de x² − 10x + 25", resposta: "0" },**/
+export const medio = [
+  { pergunta: "Δ de x² − 6x + 5", resposta: "16" },
+  { pergunta: "f(x) = 2x + 5, f(6)", resposta: "17" },
+
+  
 
   // --- NOVAS: Funções ---
   { pergunta: "f(x) = 3x − 2, f(4)", resposta: "10" },
@@ -223,5 +214,62 @@ export const banco = [
   { pergunta: "f(x) = 2x³, f(2)", resposta: "16" },
   { pergunta: "f(x) = 5x² − 1, f(3)", resposta: "44" },
   { pergunta: "f(x) = x² + 10, f(5)", resposta: "35" },
-  { pergunta: "f(x) = 9x − 7, f(3)", resposta: "20" }
+  { pergunta: "f(x) = 9x − 7, f(3)", resposta: "20" },
+
+  // --- NOVAS: Discriminante (Δ = b² - 4ac) ---
+  { pergunta: "Δ de x² − 4x + 4", resposta: "0" },
+  { pergunta: "Δ de x² − 5x + 6", resposta: "1" },
+  { pergunta: "Δ de x² − 7x + 10", resposta: "9" },
+  { pergunta: "Δ de 2x² − 3x + 1", resposta: "1" },
+  { pergunta: "Δ de x² + 2x − 3", resposta: "16" },
+  { pergunta: "Δ de x² + 6x + 9", resposta: "0" },
+  { pergunta: "Δ de 3x² − 5x + 2", resposta: "1" },
+  { pergunta: "Δ de x² − 8x + 15", resposta: "4" },
+  { pergunta: "Δ de 4x² − 4x + 1", resposta: "0" },
+  { pergunta: "Δ de −x² + 4x − 3", resposta: "4" },
+  { pergunta: "Δ de x² − x − 2", resposta: "9" },
+  { pergunta: "Δ de x² − 10x + 25", resposta: "0" },
+   { pergunta: "Δ de x² − 6x + 8", resposta: "4" },
+  { pergunta: "Δ de x² − 3x + 2", resposta: "1" },
+  { pergunta: "Δ de x² − 9x + 20", resposta: "1" },
+  { pergunta: "Δ de x² − 2x − 8", resposta: "36" },
+  { pergunta: "Δ de x² + 4x + 3", resposta: "4" },
+  { pergunta: "Δ de x² − 5x − 14", resposta: "81" },
+  { pergunta: "Δ de 2x² − 5x + 2", resposta: "9" },
+  { pergunta: "Δ de 2x² + x − 3", resposta: "25" },
+  { pergunta: "Δ de x² − 12x + 36", resposta: "0" },
+  { pergunta: "Δ de 3x² − 4x + 1", resposta: "4" },
+  { pergunta: "Δ de x² + 5x + 4", resposta: "9" },
+  { pergunta: "Δ de x² − 4x − 5", resposta: "36" },
+  { pergunta: "Δ de x² − 3x − 10", resposta: "49" },
+  { pergunta: "Δ de 2x² − 7x + 3", resposta: "25" },
+  { pergunta: "Δ de x² + 8x + 12", resposta: "16" },
+  { pergunta: "Δ de x² + x − 6", resposta: "25" },
+  { pergunta: "Δ de x² − 11x + 18", resposta: "49" },
+  { pergunta: "Δ de 5x² − 6x + 1", resposta: "16" },
+
+    // --- MAIS: Zero da função e soma/produto das raízes ---
+  { pergunta: "Zero de f(x) = 4x − 12", resposta: "3" },
+  { pergunta: "Zero de f(x) = 2x − 14", resposta: "7" },
+  { pergunta: "Zero de f(x) = 6x − 30", resposta: "5" },
+  { pergunta: "Zero de f(x) = 10x − 90", resposta: "9" },
+  { pergunta: "Soma das raízes de x² − 7x + 12", resposta: "7" },
+  { pergunta: "Produto das raízes de x² − 7x + 12", resposta: "12" },
+  { pergunta: "Soma das raízes de x² − 9x + 20", resposta: "9" },
+  { pergunta: "Produto das raízes de x² − 9x + 20", resposta: "20" },
+
+  // --- MAIS: Fatorial e combinação ---
+  { pergunta: "4!", resposta: "24" },
+  { pergunta: "5!", resposta: "120" },
+  { pergunta: "6!", resposta: "720" },
+  { pergunta: "C(4, 2)", resposta: "6" },
+  { pergunta: "C(5, 2)", resposta: "10" },
+  { pergunta: "C(6, 2)", resposta: "15" },
+
+  // --- MAIS: Progressões ---
+  { pergunta: "PA com a₁ = 3 e r = 4, a₅", resposta: "19" },
+  { pergunta: "PA com a₁ = 2 e r = 5, a₇", resposta: "32" },
+  { pergunta: "PG com a₁ = 2 e q = 3, a₄", resposta: "54" },
+  { pergunta: "PG com a₁ = 5 e q = 2, a₅", resposta: "80" }
+
 ];

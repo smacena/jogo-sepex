@@ -2,6 +2,8 @@ import { HandLandmarker, FilesetResolver } from 'https://cdn.jsdelivr.net/npm/@m
 
 const TEMPO_PERMANENCIA = 1000; // ms sobre a carta para virar
 const SUAVIZACAO = 0.3;         // 0.2 = mais suave e lento, 0.5 = mais rápido e tremido
+const TEMPO_BOTAO = 2000; // ms sobre o botão para acionar
+const TEMPO_NIVEL = 1500; // ms sobre um botão de nível
 
 export async function iniciarCamera(aoSelecionar) {
   const video = document.getElementById('video');
@@ -50,22 +52,25 @@ export async function iniciarCamera(aoSelecionar) {
         cursor.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
 
         const el = document.elementFromPoint(x, y);
-        const carta = el && el.closest('.carta');
-        const indice = carta ? Number(carta.dataset.indice) : null;
+        const alvo = el && el.closest('.carta, #novo, .nivel');
+        const chave = alvo ? (alvo.dataset.indice ?? alvo.id) : null;
 
-        if (indice !== indiceAtual) {
-          indiceAtual = indice;
+        if (chave !== indiceAtual) {
+          indiceAtual = chave;
           desde = performance.now();
           acionado = false;
         }
 
         let progresso = 0;
-        if (indice !== null && !acionado) {
-          progresso = (performance.now() - desde) / TEMPO_PERMANENCIA;
+        if (alvo && !acionado) {
+          const necessario = alvo.id === 'novo'
+            ? TEMPO_BOTAO
+            : alvo.classList.contains('nivel') ? TEMPO_NIVEL : TEMPO_PERMANENCIA;
+          progresso = (performance.now() - desde) / necessario;
           if (progresso >= 1) {
             acionado = true;
             progresso = 0;
-            aoSelecionar(indice);
+            alvo.click();
           }
         }
         cursor.style.setProperty('--p', `${progresso * 360}deg`);

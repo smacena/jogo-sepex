@@ -1,14 +1,21 @@
-import { banco } from './dados.js';
+import { fundamental, medio } from './dados.js';
+import { iniciais } from './dados-iniciais.js';
 import { config } from './config.js';
 import { criarJogo, virarCarta, esconderErradas, venceu } from './memoria.js';
 import { iniciarCamera } from './camera.js';
 
+const bancos = { iniciais, fundamental, medio };
+
 const tabuleiro = document.getElementById('tabuleiro');
+const escolha = document.getElementById('escolha');
+const listaNiveis = document.getElementById('niveis');
 const relogio = document.getElementById('relogio');
 const mensagem = document.getElementById('mensagem');
 const botaoNovo = document.getElementById('novo');
+const botaoCamera = document.getElementById('camera');
 
-let jogo, tempoRestante, intervalo, encerrado;
+let jogo, tempoRestante, intervalo;
+let encerrado = true;
 
 function atualizarRelogio() {
   relogio.textContent = `⏱ ${tempoRestante}s`;
@@ -40,24 +47,50 @@ function terminar(texto) {
   mensagem.textContent = texto;
 }
 
-// Único ponto de entrada: toque agora, câmera depois.
 function aoClicar(indice) {
   if (encerrado) return;
   const resultado = virarCarta(jogo, indice);
   if (resultado === 'ignorada') return;
   desenhar();
   if (resultado === 'erro') {
-    setTimeout(() => { esconderErradas(jogo); desenhar(); }, 1500);
+    const jogoAtual = jogo;
+    setTimeout(() => {
+      if (jogo !== jogoAtual) return; // a rodada mudou nesse meio tempo
+      esconderErradas(jogo);
+      desenhar();
+    }, 1100);
   }
   if (venceu(jogo)) terminar('Você venceu! 🎉');
 }
 
-function iniciar() {
+function mostrarEscolha() {
   clearInterval(intervalo);
-  jogo = criarJogo(banco, config.pares);
-  tempoRestante = config.tempoSegundos;
+  encerrado = true;
+  jogo = null;
+  mensagem.textContent = '';
+  relogio.textContent = '';
+  tabuleiro.hidden = true;
+  escolha.hidden = false;
+}
+
+function iniciar(nivel) {
+  const { pares, tempoSegundos } = config.niveis[nivel];
+  let novoJogo;
+  try {
+    novoJogo = criarJogo(bancos[nivel], pares);
+  } catch (erro) {
+    console.error(erro);
+    mensagem.textContent = 'Este nível não tem pares suficientes. Veja o console.';
+    return;
+  }
+
+  clearInterval(intervalo);
+  jogo = novoJogo;
+  tempoRestante = tempoSegundos;
   encerrado = false;
   mensagem.textContent = '';
+  escolha.hidden = true;
+  tabuleiro.hidden = false;
   atualizarRelogio();
   desenhar();
   intervalo = setInterval(() => {
@@ -67,8 +100,18 @@ function iniciar() {
   }, 1000);
 }
 
-botaoNovo.addEventListener('click', iniciar);
-const botaoCamera = document.getElementById('camera');
+// Botões de nível, criados a partir do config
+Object.entries(config.niveis).forEach(([chave, nivel]) => {
+  const botao = document.createElement('button');
+  botao.className = 'nivel';
+  botao.id = `nivel-${chave}`;
+  botao.textContent = nivel.nome;
+  botao.addEventListener('click', () => iniciar(chave));
+  listaNiveis.appendChild(botao);
+});
+
+botaoNovo.addEventListener('click', mostrarEscolha);
+
 botaoCamera.addEventListener('click', async () => {
   botaoCamera.disabled = true;
   botaoCamera.textContent = 'Carregando...';
@@ -82,4 +125,5 @@ botaoCamera.addEventListener('click', async () => {
     mensagem.textContent = 'Não consegui ligar a câmera. Veja o console.';
   }
 });
-iniciar();
+
+mostrarEscolha();
